@@ -96,7 +96,7 @@ if money.checkBalance() < bet or not money.checkCard() then
     os.reboot()
 else
     money.removeMoney(bet)
-    print(money.checkBalance)
+    print(tostring(money.checkBalance()))
     m.setCursorPos(1, 11)
     m.clearLine()
     m.write("Card's Balance: $"..tostring(money.checkBalance()))
@@ -120,7 +120,7 @@ m.setCursorPos(1,5)
 m.write("$"..tostring(draw()))
 
 money.addMoney(draw())
-print(money.checkBalance())
+print(tostring(money.checkBalance()))
 
 --Show balance after game
 m.setCursorPos(1, 11)

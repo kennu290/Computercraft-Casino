@@ -74,17 +74,16 @@ while true do
                 break
             end
         end
-    end
 
     --Check card validity
-    if not money.checkCard() then
+    elseif not money.checkCard() then
         m.setCursorPos(1, 11)
         m.clearLine()
         m.write("Modified Card!")
         os.sleep(5)
         os.reboot()
     end
-    
+ 
     --Show card balance
     m.setCursorPos(1, 11)
     m.clearLine()

@@ -56,7 +56,6 @@ function draw()
 end
 
 while true do
-    
     m.setCursorPos(1, 1)
     m.write("Lucky Wheel")
     m.setCursorPos(1, 10)

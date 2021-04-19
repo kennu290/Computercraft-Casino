@@ -62,12 +62,21 @@ while true do
     m.write("Lucky Wheel")
     m.setCursorPos(1, 10)
     m.write("Click To \"SPIN\" ($100)")
+    m.setCursorPos(1, 11)
+    m.clearLine()
+    m.write("Please Enter Casino Card")
+    local event, side = os.pullEvent()
 
-    while not money.checkCard() do
-        m.setCursorPos(1, 11)
-        m.clearLine()
-        m.write("Please Enter Casino Card")
+    if event == "disk" then
+        if not money.checkCard() then
+            m.setCursorPos(1, 11)
+            m.clearLine()
+            m.write("Wrong Card!")
+            os.sleep(3)
+            os.reboot()
+        end
     end
+
  
     --Show card balance
     m.setCursorPos(1, 11)
@@ -86,6 +95,9 @@ while true do
         os.reboot()
     else
         money.removeMoney(bet)
+        m.setCursorPos(1, 11)
+        m.clearLine()
+        m.write("Card's Balance: $"..tostring(money.checkBalance()))
     end
     
     --Spinning screen

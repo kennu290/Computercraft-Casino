@@ -101,6 +101,7 @@ while true do
     end
     
     --Spinning screen
+    m.setCursorPos(1,5)
     m.write("Spinning")
     os.sleep(0.5)
     m.setCursorPos(9,5)

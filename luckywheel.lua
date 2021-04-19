@@ -72,6 +72,7 @@ if event == "disk" then
         m.setCursorPos(1, 11)
         m.clearLine()
         m.write("Wrong Card!")
+        disk.eject("back")
         os.sleep(3)
         os.reboot()
     end

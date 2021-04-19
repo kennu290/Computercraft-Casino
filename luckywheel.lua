@@ -1,4 +1,4 @@
-monitor = peripheral.wrap("top")
+monitor = peripheral.find("monitor")
 monitor.clear()
 
 bet = 100

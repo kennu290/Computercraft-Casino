@@ -12,6 +12,14 @@ function setMoney(money)
     fs.copy("securefile", "/disk/securefile")
 end
 
+function addMoney(money)
+    setMoney(checkBalance()+money)
+end
+
+function removeMoney(money)
+    setMoney(checkBalance-money)
+end
+
 function checkBalance()
     local secure = fs.open("/disk/securefile", "r")
     local encmoney = secure.readAll()

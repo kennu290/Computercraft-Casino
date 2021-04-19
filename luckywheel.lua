@@ -71,7 +71,8 @@ while true do
     end
 
     --Check card validity
-    while not money.checkCard() do
+    if not money.checkCard() then
+        m.setCursorPos(1, 11)
         m.clearLine()
         m.write("Modified Card!")
         os.sleep(5)

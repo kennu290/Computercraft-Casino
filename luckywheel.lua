@@ -84,6 +84,7 @@ while true do
     end
     
     --Show card balance
+    m.setCursorPos(1, 11)
     m.clearLine()
     m.write("Card's Balance: $"..tostring(money.checkBalance()))
     

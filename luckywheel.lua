@@ -64,10 +64,7 @@ m.setCursorPos(1, 10)
 m.write("Click To \"SPIN\" ($100)")
 m.setCursorPos(1, 11)
 m.clearLine()
-
-if not disk.hasData(d) then
-    m.write("Please Enter Casino Card")
-end
+m.write("Please Enter Casino Card")
 
 local event, side = os.pullEvent()
 

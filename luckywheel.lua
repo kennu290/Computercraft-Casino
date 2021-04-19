@@ -67,12 +67,15 @@ while true do
     m.write("Please Enter Casino Card")
 
     --Check whether card is entered
-    while true do
-        local event = os.pullEvent()
-        if event == "disk" then
-            break
+    if not disk.hasData then
+        while true do
+            local event = os.pullEvent()
+            if event == "disk" then
+                break
+            end
         end
     end
+
 
     --Check card validity
     if not money.checkCard() then

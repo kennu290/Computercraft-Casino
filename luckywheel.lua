@@ -76,7 +76,6 @@ while true do
         end
     end
 
-
     --Check card validity
     if not money.checkCard() then
         m.setCursorPos(1, 11)

@@ -29,13 +29,17 @@ function checkBalance()
 end
 
 function checkCard()
-    if fs.exists("disk/securefile") then
-        local secure = fs.open("disk/securefile", "r")
-        local encmoney = secure.readAll()
-        secure.close()
-        local realmoney = encryptor.decrypt(encmoney, "vFhKE@k!U4F>xZXR")
-        if type(realmoney) == "number" then
-            return true
+    if disk.hasData then
+        if fs.exists("disk/securefile") then
+            local secure = fs.open("disk/securefile", "r")
+            local encmoney = secure.readAll()
+            secure.close()
+            local realmoney = encryptor.decrypt(encmoney, "vFhKE@k!U4F>xZXR")
+            if type(realmoney) == "number" then
+                return true
+            else
+                return false
+            end
         else
             return false
         end

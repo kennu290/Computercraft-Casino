@@ -62,26 +62,20 @@ while true do
     m.write("Lucky Wheel")
     m.setCursorPos(1, 10)
     m.write("Click To \"SPIN\" ($100)")
-    m.setCursorPos(1, 11)
-    m.clearLine()
-    m.write("Please Enter Casino Card")
 
-    --Check whether card is entered
-    if not disk.hasData then
-        while true do
-            local event = os.pullEvent()
-            if event == "disk" then
-                break
-            end
-        end
-
-    --Check card validity
-    elseif not money.checkCard() then
+    while not money.checkCard() do
         m.setCursorPos(1, 11)
         m.clearLine()
-        m.write("Modified Card!")
-        os.sleep(5)
-        os.reboot()
+        m.write("Please Enter Casino Card")
+        local event, side = os.pullEvent()
+        if event == "disk" then
+            if money.checkCard() then
+                break
+            else
+                m.clearLine()
+                m.write("Modified Card!")
+            end
+        end
     end
  
     --Show card balance

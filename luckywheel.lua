@@ -67,15 +67,6 @@ while true do
         m.setCursorPos(1, 11)
         m.clearLine()
         m.write("Please Enter Casino Card")
-        local event, side = os.pullEvent()
-        if event == "disk" then
-            if money.checkCard() then
-                break
-            else
-                m.clearLine()
-                m.write("Modified Card!")
-            end
-        end
     end
  
     --Show card balance
@@ -89,7 +80,7 @@ while true do
     m.clearLine()
 
     --Eat the card balance
-    if money.checkBalance() < bet then
+    if money.checkBalance() < bet or not money.checkCard() then
         m.write("You have insufficent balance!")
         os.sleep(5)
         os.reboot()

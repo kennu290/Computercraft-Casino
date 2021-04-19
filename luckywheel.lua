@@ -2,7 +2,6 @@ os.loadAPI("encryptor")
 os.loadAPI("money")
 
 local m = peripheral.find("monitor")
-local d = peripheral.find("drive")
 
 m.clear()
 
@@ -124,7 +123,7 @@ money.addMoney(draw())
 m.setCursorPos(1, 11)
 m.clearLine()
 m.write("Card's Balance: $"..tostring(money.checkBalance()))
-disk.eject(d)
+disk.eject("back")
 os.sleep(3)
 os.reboot()
 

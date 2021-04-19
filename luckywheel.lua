@@ -2,6 +2,7 @@ os.loadAPI("encryptor")
 os.loadAPI("money")
 
 m = peripheral.find("monitor")
+
 m.clear()
 
 bet = 100
@@ -55,22 +56,47 @@ function draw()
     
 end
 
+--Game loop
 while true do
     m.setCursorPos(1, 1)
     m.write("Lucky Wheel")
     m.setCursorPos(1, 10)
     m.write("Click To \"SPIN\" ($100)")
+
+    --Check whether card is entered
+    if not disk.hasData then
+        m.setCursorPos(1, 11)
+        m.write("Please Enter Casino Card")
+        os.pullEvent("disk")
+    end
+
+    --Check card validity
+    while not money.checkCard() do
+        m.clearLine()
+        m.write("Modified Card!")
+        os.sleep(5)
+        os.reboot()
+    end
     
-    event, side, x, y = os.pullEvent("monitor_touch")
+    --Show card balance
+    m.clearLine()
+    m.write("Card's Balance: $"..tostring(money.checkBalance()))
+    
+    --Spin
+    os.pullEvent("monitor_touch")
     m.setCursorPos(1, 5)
     m.clearLine()
+
+    --Eat the card balance
     if money.checkBalance() < bet then
         m.write("You have insufficent balance!")
+        os.sleep(5)
         os.reboot()
     else
         money.removeMoney(bet)
     end
     
+    --Spinning screen
     m.write("Spinning")
     os.sleep(0.5)
     m.setCursorPos(9,5)
@@ -84,9 +110,13 @@ while true do
     os.sleep(0.5)
     m.clearLine()
     m.setCursorPos(1,5)
-    m.write("$")
-    m.setCursorPos(2,5)
-    m.write(tostring(draw()))
+    m.write("$"..tostring(draw()))
+
     money.addMoney(draw())
+
+    --Show balance after game
+    m.setCursorPos(1, 11)
+    m.clearLine()
+    m.write("Card's Balance: $"..tostring(money.checkBalance()))
 
 end

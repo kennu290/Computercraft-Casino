@@ -1,7 +1,7 @@
 os.loadAPI("encryptor")
 os.loadAPI("money")
 
-m = peripheral.find("m")
+m = peripheral.find("monitor")
 m.clear()
 
 bet = 100

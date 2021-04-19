@@ -2,6 +2,7 @@ os.loadAPI("encryptor")
 os.loadAPI("money")
 
 local m = peripheral.find("monitor")
+local d = "back"
 
 m.clear()
 
@@ -72,7 +73,7 @@ if event == "disk" then
         m.setCursorPos(1, 11)
         m.clearLine()
         m.write("Wrong Card!")
-        disk.eject("back")
+        disk.eject(d)
         os.sleep(3)
         os.reboot()
     end
@@ -92,11 +93,11 @@ m.clearLine()
 --Eat the card balance
 if money.checkBalance() < bet or not money.checkCard() then
     m.write("You have insufficent balance!")
+    disk.eject(d)
     os.sleep(5)
     os.reboot()
 else
     money.removeMoney(bet)
-    print(tostring(money.checkBalance()))
     m.setCursorPos(1, 11)
     m.clearLine()
     m.write("Card's Balance: $"..tostring(money.checkBalance()))
@@ -117,16 +118,16 @@ m.write(".")
 os.sleep(0.5)
 m.clearLine()
 m.setCursorPos(1,5)
-m.write("$"..tostring(draw()))
+local result = draw()
+m.write("$"..tostring(result))
 
-money.addMoney(draw())
-print(tostring(money.checkBalance()))
+money.addMoney(result)
 
 --Show balance after game
 m.setCursorPos(1, 11)
 m.clearLine()
 m.write("Card's Balance: $"..tostring(money.checkBalance()))
-disk.eject("back")
+disk.eject(d)
 os.sleep(3)
 os.reboot()
 

@@ -1,8 +1,8 @@
 os.loadAPI("encryptor")
 os.loadAPI("money")
 
-m = peripheral.find("monitor")
-d = peripheral.find("drive")
+local m = peripheral.find("monitor")
+local d = peripheral.find("drive")
 
 m.clear()
 
@@ -65,7 +65,7 @@ m.write("Click To \"SPIN\" ($100)")
 m.setCursorPos(1, 11)
 m.clearLine()
 
-if not disk.hasData then
+if not disk.hasData(d) then
     m.write("Please Enter Casino Card")
 end
 

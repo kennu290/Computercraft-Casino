@@ -1,5 +1,8 @@
-monitor = peripheral.find("monitor")
-monitor.clear()
+os.loadAPI("encryptor")
+os.loadAPI("money")
+
+m = peripheral.find("m")
+m.clear()
 
 bet = 100
 
@@ -54,29 +57,37 @@ end
 
 while true do
     
-    monitor.setCursorPos(1, 1)
-    monitor.write("Lucky Wheel")
-    monitor.setCursorPos(1, 10)
-    monitor.write("Click To \"SPIN\" ($100)")
+    m.setCursorPos(1, 1)
+    m.write("Lucky Wheel")
+    m.setCursorPos(1, 10)
+    m.write("Click To \"SPIN\" ($100)")
     
     event, side, x, y = os.pullEvent("monitor_touch")
-    monitor.setCursorPos(1, 5)
-    monitor.clearLine()
-    monitor.write("Spinning")
+    m.setCursorPos(1, 5)
+    m.clearLine()
+    if money.checkBalance() < bet then
+        m.write("You have insufficent balance!")
+        os.reboot()
+    else
+        money.removeMoney(bet)
+    end
+    
+    m.write("Spinning")
     os.sleep(0.5)
-    monitor.setCursorPos(9,5)
-    monitor.write(".")
+    m.setCursorPos(9,5)
+    m.write(".")
     os.sleep(0.5)
-    monitor.setCursorPos(10,5)
-    monitor.write(".")
+    m.setCursorPos(10,5)
+    m.write(".")
     os.sleep(0.5)
-    monitor.setCursorPos(11,5)
-    monitor.write(".")
+    m.setCursorPos(11,5)
+    m.write(".")
     os.sleep(0.5)
-    monitor.clearLine()
-    monitor.setCursorPos(1,5)
-    monitor.write("$")
-    monitor.setCursorPos(2,5)
-    monitor.write(tostring(draw()))
+    m.clearLine()
+    m.setCursorPos(1,5)
+    m.write("$")
+    m.setCursorPos(2,5)
+    m.write(tostring(draw()))
+    money.addMoney(draw())
 
 end
